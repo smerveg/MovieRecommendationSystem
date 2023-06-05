@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using MovieRecommendationSystem.BLL.Concrete;
 using MovieRecommendationSystem.BLL.ValidationRules;
+using MovieRecommendationSystem.Core.Enums;
 using MovieRecommendationSystem.DAL.EntityFramework;
 using MovieRecommendationSystem.EntityLayer.Concrete;
 using System;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using ClassLibrary1.Enums;
+
 
 namespace MovieRecommendationSystem.WEBUI.Controllers
 {
