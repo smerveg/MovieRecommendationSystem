@@ -1,0 +1,122 @@
+﻿@model MovieRecommendationSystem.EntityLayer.Concrete.MovieDetails
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group"></div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+        </ul>
+
+    </nav>
+</div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Movie Details</h2>
+
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+
+        <div class="col-lg-5">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>@Html.Label(Model.Title)</h5>
+                </div>
+                <div>
+                    <div class="ibox-content no-padding border-left-right">
+                        <img alt="image"  src="@Url.Content(Model.PosterPath)" />
+                    </div>
+                    <div class="ibox-content profile-content">
+                        <h4><strong>Director(s)</strong></h4>
+                        @foreach (var item in Model.Crew)
+                        {
+                            <p>@Html.Label(item.Name)</p>
+                        }
+
+                        <h4><strong>Cast</strong></h4>
+                        @foreach (var item in Model.Cast)
+                        {
+                            <p>@Html.Label(item.Name)</p>
+                        }
+
+                        <h4><strong>Release Date</strong></h4>
+
+                        <p>@Html.Label(Model.ReleaseDate)</p>
+
+                        <h4><strong>Language</strong></h4>
+
+                        <p>@Html.Label(Model.iso_639_1)</p>
+
+                        <h4><strong>Overview</strong></h4>
+
+                        <p>@Model.Overview</p>
+
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Comments</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>                        
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <div>
+                        <div class="feed-activity-list">
+                            @foreach (var item in Model.Comments)
+                            {
+                                <div class="feed-element">
+                                    <div class="media-body ">
+                                        <small class="float-right">@item.CommentDate</small>
+                                        <strong>@item.UserID</strong> <br>
+                                        <small class="text-muted">yıldız gelecek</small>
+                                    <p>@item.Comment</p>
+                                            
+                                        
+
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+
+                        <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MovieRecommendationSystem.EntityLayer.Concrete.Movie> 
+@{
+    ViewBag.Title = "MovieList";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Title</th>
+                                <th>Release Date</th>
+                                                               
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                   
+                                    <td>@item.Title</td>
+                                    <td>@item.ReleaseDate</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

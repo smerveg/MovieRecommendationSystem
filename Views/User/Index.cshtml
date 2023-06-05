@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MovieRecommendationSystem.EntityLayer.Concrete.User>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Last Name</th>
+                                <th>Mail</th>
+                                <th>Status</th>
+                                <th>Change Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <input type="hidden" id="uid" />
+                                <td>@item.UserName</td>
+                                <td>@item.Name</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Mail</td>
+                                <td>@item.Status</td>
+                                <td><a id="changeStatus" class="btn btn-primary btn-sm" onclick="Change(@item.UserID)">Delete</a></td>
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+
+<script type="text/javascript">
+
+    var Change = function (id) {
+        $("#uid").val(id);
+        var userId = $("#uid").val();
+        $.ajax({
+            type: "POST",
+            url: "/User/ChangeStatus",
+            data: { id:userId},
+            success: function (result) {
+                if (result) {
+                    $("#uid").val(null);
+                    window.location.href = "/User/Index";
+                    alert("Status is changed.");
+                }
+                else {
+                    alert("Status cannot be changed.");
+                }
+            },
+            
+        });
+    }
+
+
+
+</script>
+

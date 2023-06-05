@@ -1,0 +1,103 @@
+﻿@model MovieRecommendationSystem.EntityLayer.Concrete.BestWorstList
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+
+            <form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group"></div>
+            </form>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+        </ul>
+
+    </nav>
+</div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Lists</h2>
+
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+
+
+        <div class="col-lg-6">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Best List</h5>
+
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Movie Name</th>
+                                <th>Average Score</th>
+                                
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.BestList)
+                            {
+                                <tr>
+                                    
+                                    <td>@item.Title</td>
+                                    <td>@item.AverageScore</td></tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Worst List</h5>
+
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Movie Name</th>
+                                <th>Average Score</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.WorstList)
+                            {
+                                <tr>
+
+                                    <td>@item.Title</td>
+                                    <td>@item.AverageScore</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

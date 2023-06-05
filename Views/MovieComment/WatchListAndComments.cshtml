@@ -1,0 +1,210 @@
+﻿@model IEnumerable<MovieRecommendationSystem.EntityLayer.Concrete.MovieComment>
+@{
+    ViewBag.Title = "WatchListAndComments";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Movie Title</th>
+                                <th>Delete</th>
+                                <th>Add & Edit</th>
+                                
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <input type="hidden" id="mid" />
+                                <input type="hidden" id="mscore" />
+                                <input type="hidden" id="mcomment" />
+                                <td>@item.MovieTitle</td>
+                                <td><a id="showModal" class="btn btn-w-m btn-danger" onclick="Confirm(@item.MovieCommentID)">Delete from watchlist</a></td>
+                                @if (item.Comment == null)
+                                {
+                                    <td><a id="showModal2" class="btn btn-w-m btn-info" onclick="Add(@item.MovieCommentID, '@item.Score', '@item.Comment')">Add comment</a></td>
+                                    
+                                }
+                                else
+                                {
+                                    
+                                    <td><a id="showModal3" class="btn btn-w-m btn-default" onclick="Edit(@item.MovieCommentID, '@item.Score', '@item.Comment')">Edit comment</a></td>
+
+                                }
+                                @Html.Partial("_commentEditPartial", new ViewDataDictionary { { "id", item.MovieCommentID }, { "score", item.Score }, { "comment", item.Comment } })
+                                @Html.Partial("_commentPartial", new MovieRecommendationSystem.EntityLayer.Concrete.MovieComment(),
+                               new ViewDataDictionary { { "id", item.MovieCommentID } })
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@Html.Partial("_confirmationPartial")
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btnCancel').click(function () {
+            window.location.href = '/MovieComment/WatchListAndComments';
+        })
+
+        $('#btnDelete').click(function () {
+
+            var movieId = $('#mid').val();
+            $.ajax({
+                type: 'POST',
+                url: '/MovieComment/Delete',
+                data: { id: movieId },
+                success: function (result) {
+                    if (result) {
+                        $('#mid').val(null);
+                        window.location.href = '/MovieComment/WatchListAndComments';
+                       
+
+                    }
+                    else {
+                        alert('Movie cannot be deleted.');
+                    }
+                }
+
+
+
+            })
+        })
+
+
+
+    })
+    var Confirm = function (id) {
+        $('#mid').val(id);
+        $('#confirmModal').modal('show');
+
+    }
+
+
+
+    //Add comment
+    $(document).ready(function () {
+        $('.btnCancel').click(function () {
+            window.location.href = '/MovieComment/WatchListAndComments';
+        })
+
+        $('#addButton').click(function () {
+
+            var movieId = $('#mid').val();
+            var movieScore = $('#scorem').val();
+            var movieComment = $('#commentm').val();
+            var movieComment = $('#commentm').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/MovieComment/AddComment',
+                data: JSON.stringify({
+                    id: movieId,
+                    score: movieScore,
+                    comment: movieComment
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        $('#mid').val(null);
+                        $('#mscore').val(null);
+                        $('#mcomment').val(null);
+                        window.location.href = '/MovieComment/WatchListAndComments';
+                        alert('Comment is added.');
+
+                    }
+                    else {
+                        alert('Comment cannot be added.');
+                    }
+                }
+
+
+
+            })
+        })
+
+
+
+    })
+    //Edit comment
+    $(document).ready(function () {
+        $('.btnCancel').click(function () {
+            window.location.href = '/MovieComment/WatchListAndComments';
+        })
+
+        $('#saveButton').click(function () {
+
+            var movieId = $('#mid').val();
+            var movieScore = $('#mscore').val();
+            var movieComment = $('#mcomment').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/MovieComment/AddComment',
+                data: JSON.stringify({
+                    id: movieId,
+                    score: movieScore,
+                    comment:movieComment
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        $('#mid').val(null);
+                        $('#mscore').val(null);
+                        $('#mcomment').val(null);
+                        window.location.href = '/MovieComment/WatchListAndComments';
+                        
+
+                    }
+                    else {
+                        alert('Comment cannot be edited.');
+                    }
+                }
+
+
+
+            })
+        })
+
+
+
+    })
+    var Add = function (id,score,comment) {
+        $('#mid').val(id);
+        $('#mscore').val(score);
+        $('#mcomment').val(comment);
+        $('#addModal').modal('show');
+
+    }
+    var Edit = function (id, score, comment) {
+        $('#mid').val(id);
+        $('#mscore').val(score);
+        $('#mcomment').val(comment);
+        $('#editModal').modal('show');
+
+    }
+</script>
+

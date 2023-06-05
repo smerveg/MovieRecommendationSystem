@@ -1,0 +1,79 @@
+﻿@model IEnumerable<MovieRecommendationSystem.EntityLayer.Concrete.Movie>
+@{
+    ViewBag.Title = "GetMovies";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Title</th>
+                                <th>Release Date</th>
+                                <th></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <input type="hidden" id="mid"/>
+                                <input type="hidden" id="mtitle"/>
+                                <td><a href="/Movie/Details/@item.ID">@item.Title</a></td>
+                                <td>@item.ReleaseDate</td>
+                                <td><a id="addMovie" class="btn btn-primary btn-sm" onclick="Add(@item.ID,'@item.Title')">Add Watchlist</a></td>
+                              
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+
+    var Add = function (id,title) {
+        $("#mid").val(id);
+        $("#mtitle").val(title);
+        var movieId = $("#mid").val();
+        var movieTitle = $("#mtitle").val();
+        $.ajax({
+            type: "POST",
+            url: "/MovieComment/Add",
+            data: JSON.stringify({
+                id: movieId,
+                title:movieTitle
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    $("#mid").val(null);
+                    $("#mtitle").val(null);
+                    alert("added");
+                }
+                else {
+                    alert("already added");
+                }
+            },
+
+        });
+    }
+
+
+
+</script>

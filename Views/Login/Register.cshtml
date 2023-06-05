@@ -1,0 +1,56 @@
+﻿@model MovieRecommendationSystem.EntityLayer.Concrete.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+
+<div class="loginColumns animated fadeInDown">
+    <div class="row">
+
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="ibox-content">
+                @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                {
+                <form class="m-t" role="form" action="index.html">
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(x => x.Name, new { placeholder = "Name", @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(x => x.LastName, new { placeholder = "Lastname", @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(x => x.UserName, new { placeholder = "Username", @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(x => x.Mail, new { placeholder = "Mail", @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(x => x.Password, new { placeholder = "Password", @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+                </form>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+

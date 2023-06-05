@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MRSystemLayout.cshtml";
+}
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Load Genre</h5>
+
+                </div>
+                <div class="ibox-content float-e-margins">
+
+                    <p>
+                     <button type="button" class="btn btn-primary btn-lg" id="genre">Load</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Load Language</h5>
+                    
+                </div>
+                <div class="ibox-content float-e-margins">
+
+                    <p>
+                        <button type="button" class="btn btn-primary btn-lg" id="language">Load</button></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+<script type="text/javascript">
+    $("#genre").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Configuration/LoadGenre",
+            success: function (response) {
+                alert(response);
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+
+    $("#language").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Configuration/LoadLanguage",
+            success: function (response) {
+                alert(response);
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+</script>
+

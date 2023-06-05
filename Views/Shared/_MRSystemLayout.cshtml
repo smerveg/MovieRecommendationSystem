@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Dashboard v.2</title>
+
+    <link href="~/Templates/inspinia-gh-pages/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Templates/inspinia-gh-pages/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Templates/inspinia-gh-pages/inspinia-gh-pages/css/animate.css" rel="stylesheet">
+    <link href="~/Templates/inspinia-gh-pages/inspinia-gh-pages/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                        <li>
+                            <a href="/Movie/Index"><i class="fa fa-star"></i> <span class="nav-label">Homepage</span></a>
+                        </li>
+                        <li>
+                            <a href="/List/BestAndWorstList"><i class="fa fa-star"></i> <span class="nav-label">Best & Worst Lists</span></a>
+                        </li>
+                  
+                                               
+                    @if (User.IsInRole("A"))
+                    {
+                        <li>
+                            <a href="/User/Index"><i class="fa fa-star"></i> <span class="nav-label">Users</span></a>
+                        </li>
+                        <li>
+                        <a href="/Configuration/Index"><i class="fa fa-star"></i> <span class="nav-label">Configuratons</span></a>
+                        </li>
+                    }    
+                     @if (User.IsInRole("A") || User.IsInRole("U"))
+                    {
+                        <li>
+                            <a href="/MovieComment/WatchListAndComments"><i class="fa fa-star"></i> <span class="nav-label">Watchlist & Comments</span></a>
+                        </li>
+                        <li>
+                            <a href="/Login/LogOut"><i class="fa fa-star"></i> <span class="nav-label">Log out</span></a>
+                        </li>
+                    }
+                    
+
+
+
+                </ul>
+
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            @RenderBody()
+
+            <div class="footer">
+                <div class="float-right">
+                    
+                </div>
+                <div>
+                    
+                </div>
+            </div>
+        </div>
+       
+
+    </div>
+
+    <!-- Mainly scripts -->
+    @*<script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>*@
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/popper.min.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/bootstrap.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.symbol.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/flot/jquery.flot.time.js"></script>
+
+    <!-- Peity -->
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/inspinia.js"></script>
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="~/Templates/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+
+    
+</body>
+</html>
